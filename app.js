@@ -1,4 +1,3 @@
-
 // function showAllPets()========================
 
 function showAllPets(){
@@ -9,7 +8,7 @@ function showAllPets(){
 }
 
 function showAllPetCard(pets){
-    //  console.log(pets);
+     console.log(pets);
 
  
 
@@ -37,8 +36,7 @@ function showAllPetCard(pets){
     
      pets.forEach(pet => {
         // console.log(pet);
-        let {breed,gender,date_of_birth,price,image,pet_name
-        } = pet;
+        let {breed,gender,date_of_birth,price,image,pet_name,petId} = pet;
         let div = document.createElement('div');
         div.innerHTML = `
            <div class="card card-compact bg-base-100 shadow">
@@ -57,8 +55,8 @@ function showAllPetCard(pets){
             <button onclick="petsImage('${image}')"><i class="fa-regular fa-thumbs-up"></i>
             </button>
             
-            <button class="btn btn-outline btn-accent btn-xs ">Adapt</button>
-            <button class="btn btn-outline btn-accent btn-xs onclick='showModal("${pet}")' ">Detailst</button>
+            <button class="btn btn-outline btn-accent btn-xs onclick="adaptModal()" id="adapt">Adapt</button>
+             <button class="btn btn-outline btn-accent btn-xs" onclick="showModal(${petId})">Details</button>
     </div>
 </div>
         `
@@ -66,6 +64,63 @@ function showAllPetCard(pets){
      });
 }
 
+
+// showModal() ======================
+
+function showModal(petId) {
+  fetch(`https://openapi.programming-hero.com/api/peddy/pet/${petId}`)
+  .then(res=> res.json())
+  .then(data => openModal(data.petData))
+  
+}
+
+function openModal(petdata){
+    console.log(petdata);
+
+    let {date_of_birth,gender,image,pet_details ,pet_name,price,vaccinated_status,breed} = petdata;
+    console.log(date_of_birth);
+
+    let modal = document.getElementById('modal');
+    modal.innerHTML =`
+        <dialog id="my_modal_5" class="modal modal-bottom sm:modal-middle">
+  <div class="modal-box">
+    <figure>
+    <img
+      src=${image} class="w-full rounded-md"/>
+  </figure>
+  <div class="card-body p-2">
+    <h2 class="card-title text-xl">${pet_name}</h2>
+
+    <div class="grid grid-cols-2">
+         <p class="text-sm text-gray-500 pb-0.5 font-semibold"><i class="fa-solid fa-bread-slice"></i> Breed: ${breed}</p>
+         <p class="text-sm text-gray-500 pb-0.5 font-semibold"><i class="fa-regular fa-calendar"></i> Birth: ${date_of_birth}</p>
+         <p class="text-sm text-gray-500 pb-0.5 font-semibold"><i class="fa-solid fa-venus"></i> Gender:${gender}</p>
+         <p class="text-sm text-gray-500 pb-0.5 font-semibold"><i class="fa-solid fa-viruses"></i> vaccine: ${vaccinated_status}</p>
+         <p class="text-sm text-gray-500 pb-0.5 font-semibold">$ Price: ${price}</p>
+    </div>
+    
+  </div>
+    <div class="modal-action flex flex-col">
+      <form method="dialog" class="flex flex-col">
+        <!-- if there is a button in form, it will close the modal -->
+         <h2 class="card-title text-lg">Details</h2>
+         <p class="text-sm text-gray-500 pb-2 font-semibold">${pet_details}</p>
+
+        <button class="btn font-bold text-green-900 bg-green-300 text-lg">Close</button>
+
+      </form>
+
+    </div>
+  </div>
+</dialog>
+    `
+
+    my_modal_5.showModal()
+}
+
+
+
+// adaptModal() ========================
 
 
 function petsImage(img){
@@ -89,16 +144,22 @@ function categoryBtn(){
 }
 
 function makecategoryBtn(categories){
-    //  console.log(categories);
+     console.log(categories);
+
 
      let cataBtn = document.getElementById('cataBtn');
      categories.forEach((cat) =>{
         // console.log(cat);
-        let {category,id  } = cat;
+        let {category,id ,category_icon} = cat;
 
         let btn = document.createElement('button')
-        btn.innerText = category
-        btn.classList.add('btn','bg-teal-300')
+        // btn.innerText = category;
+     
+        btn.innerHTML = `
+          <img src=${category_icon} class="w-8">
+          <h2 class="font-bold text-lg">${category}</h2>
+        `
+        btn.classList.add('btn','bg-green-100','flex','gap-1','justify-evenly')
         btn.addEventListener('click',()=>fetchByCategory({category}))
 
 
@@ -129,9 +190,6 @@ function  fetchByCategory({category}){
    
 }
 
-function showModal(pet){
-   console.log(pet);
-}
 
 
 
@@ -143,4 +201,3 @@ function showModal(pet){
 
 categoryBtn()
 showAllPets()
-showModal()
