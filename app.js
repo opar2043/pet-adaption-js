@@ -10,8 +10,30 @@ function showAllPets(){
 
 function showAllPetCard(pets){
     //  console.log(pets);
+
+ 
+
      let mainDiv = document.getElementById('mainDiv')
      mainDiv.innerHTML = ''
+
+     if(pets.length === 0){
+      mainDiv.classList.add('auto')
+       let div =  document.createElement('div');
+       div.classList.add('mx-auto', 'w-3/4')
+        div.innerHTML = `
+        <div class="flex justify-center items-center mx-auto border-2 w-1/2">
+             <img src="images/error.webp" class="text-center w-[200px] mx-auto">
+       </div>
+         <h2 class="font-bold text-lg text-center">No Information Available</h2>
+        <p class="text-sm font-semibold text-center">It is a long established fact that a reader will be distracted by the readable content of a page when looking at 
+        its layout. The point of using Lorem Ipsum is that it has a.</p>
+        `
+        mainDiv.appendChild(div)
+
+      // mainDiv.innerText = 'no pets found'
+
+      
+      }
     
      pets.forEach(pet => {
         // console.log(pet);
@@ -36,13 +58,14 @@ function showAllPetCard(pets){
             </button>
             
             <button class="btn btn-outline btn-accent btn-xs ">Adapt</button>
-            <button class="btn btn-outline btn-accent btn-xs ">Detailst</button>
+            <button class="btn btn-outline btn-accent btn-xs onclick='showModal("${pet}")' ">Detailst</button>
     </div>
 </div>
         `
         mainDiv.appendChild(div)
      });
 }
+
 
 
 function petsImage(img){
@@ -78,7 +101,8 @@ function makecategoryBtn(categories){
         btn.classList.add('btn','bg-teal-300')
         btn.addEventListener('click',()=>fetchByCategory({category}))
 
-        console.log(btn);
+
+        // console.log(btn);
         cataBtn.appendChild(btn)
      })
 }
@@ -86,18 +110,28 @@ function makecategoryBtn(categories){
 
 function  fetchByCategory({category}){
     console.log(category);
-    fetch(`https://openapi.programming-hero.com/api/peddy/category/${category}`)
-    .then(res=> res.json())
-    .then(data => showAllPetCard(data.data))
+    let spin = document.getElementById('spin')
+    spin.classList.remove('hidden');
+
+    setTimeout(()=>{
+      let spin = document.getElementById('spin')
+      spin.classList.add('hidden')
+      
+      fetch(`https://openapi.programming-hero.com/api/peddy/category/${category}`)
+      .then(res=> res.json())
+      .then(data => showAllPetCard(data.data))
+    },2000)
+
+   
+
+
+
+   
 }
 
-// function stopSpin(){
-
-//     setTimeout(()=>{
-//        showAllPets()
-//     },2000)
-// }
-
+function showModal(pet){
+   console.log(pet);
+}
 
 
 
@@ -109,3 +143,4 @@ function  fetchByCategory({category}){
 
 categoryBtn()
 showAllPets()
+showModal()

@@ -4,3 +4,13 @@
 .btnHyr{
     border-radius: 55px;
 }
+
+.auto{
+    /* width: 20px; */
+    margin: 0 auto;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    justify-items: center;
+}
