@@ -51,7 +51,7 @@
             </div>
             <div class="navbar-center hidden lg:flex">
               <ul class="menu menu-horizontal px-1 gap-2">
-                <li><a class="bg-orange-300">Home</a></li>
+                <li><a class="bg-orange-300" >Home</a></li>
                 <li><a class="bg-orange-300">Shope</a></li>
                 <li><a class="bg-orange-300">Contuct</a></li>
               </ul>
@@ -101,7 +101,7 @@
 
     <!-- api area show all cates -->
      <div class="w-11/12 mx-auto my-7 py-3 mt-8">
-        <div class="flex flex-col md:flex-row gap-2 md:justify-between mb-4">
+        <div class="flex flex-row md:flex-row gap-2 items-center justify-between mb-4">
             <h2 class="text-xl font-bold">Best Deal For You</h2>
             <button class="btn btn-active btn-accent text-white bg-emerald-700 border-none">Short By Price</button>
         </div>
@@ -110,15 +110,15 @@
 
         </div>
 
-        <div class="flex  justify-between gap-6">  
-             <div class="w-3/4 bg-gray-200 p-3 rounded-md">
+        <div class="flex  justify-between gap-3">  
+             <div class="w-3/4 bg-gray-200 p-2 rounded-md">
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-2" id="mainDiv">
                 </div>
 
                 </span>
              </div>
              <div class="m-2 w-1/4 border rounded-lg shadow-md">
-                <div id="petImg" class="grid grid-cols-2 gap-3  p-2">
+                <div id="petImg" class="grid grid-cols-1 md:grid-cols-2 gap-3  p-2">
 
                 </div>
         
@@ -132,24 +132,33 @@
       <!-- Open the modal using ID.showModal() method -->
 
       <button class="btn hidden" onclick="">open modal</button>
-
-
      </div>
-<!-- You can open the modal using ID.showModal() method -->
-<button class="btn" onclick="">open modal</button>
-<dialog id="my_modal_4" class="modal">
-  <div class="modal-box w-11/12 max-w-5xl">
-    <h3 class="text-lg font-bold">Hello!</h3>
-    <p class="py-4">Click the button below to close</p>
-    <div class="modal-action">
-      <form method="dialog">
-        <!-- if there is a button, it will close the modal -->
-        <button class="btn">Close</button>
-      </form>
-    </div>
-  </div>
-</dialog>
-     <div>
+<button class="btn hidden" onclick="">open modal</button>
+
+     <div id="countDiv">
+       <button class="btn hidden" onclick="">open modal</button>
+       <dialog id="my_modal_3" class="modal">
+        <div class="modal-box">
+          <form method="dialog">
+            <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+          </form>
+          <div class="flex justify-center items-center flex-col gap-2">
+            <div class="flex text-emerald-600 text-4xl justify-center gap-2">
+              <i class="fa-solid fa-cat"></i>
+              <i class="fa-solid fa-dog"></i>
+            </div>
+
+            <h2 class="text-xl font-bold">Congratulations</h2>
+            <p class="text-sm font-semibold">You Adapt This Pet</p>
+            <h3 class="text-2xl font-bold" id="div">3</h3>
+
+          </div>
+          
+        </div>
+      </dialog>
+    
+     </div>
+     
      <!-- footer section -->
 
      <footer class="bg-gray-800 text-white py-10 ">

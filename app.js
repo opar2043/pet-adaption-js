@@ -1,4 +1,4 @@
-// function showAllPets()========================
+// unction showAllPets()========================
 
 function showAllPets(){
 
@@ -8,10 +8,7 @@ function showAllPets(){
 }
 
 function showAllPetCard(pets){
-     console.log(pets);
-
- 
-
+  
      let mainDiv = document.getElementById('mainDiv')
      mainDiv.innerHTML = ''
 
@@ -51,17 +48,39 @@ function showAllPetCard(pets){
     <p class="text-sm text-gray-500 pb-0.5 font-semibold"><i class="fa-solid fa-venus"></i> Gender:${gender}</p>
     <p class="text-sm text-gray-500 pb-0.5 font-semibold">$ Price: ${price}</p>
   </div>
-  <div class="grid grid-cols-3 gap-3 py-2 px-2">
-            <button onclick="petsImage('${image}')"><i class="fa-regular fa-thumbs-up"></i>
-            </button>
-            
-            <button class="btn btn-outline btn-accent btn-xs onclick="adaptModal()" id="adapt">Adapt</button>
-             <button class="btn btn-outline btn-accent btn-xs" onclick="showModal(${petId})">Details</button>
+  <div class="grid grid-cols-3 gap-3 p-2 border-2 rounded-lg">
+              <button onclick="petsImage('${image}')"><i class="fa-regular fa-thumbs-up"></i>
+              </button>          
+              <button class="btn btn-outline btn-accent btn-xs" onclick="modalVai()">Adapt</button>
+               <button class="btn btn-outline btn-accent btn-xs" onclick="showModal(${petId})">Details</button>
     </div>
 </div>
         `
         mainDiv.appendChild(div)
      });
+}
+
+
+let a = 3;
+
+
+function modalVai(){
+
+  setInterval(()=>{
+    a--;
+    let countDiv = document.getElementById('countDiv');
+    let div = document.getElementById('div'); 
+    div.innerText = a;
+
+    if(a === 0){
+      countDiv.classList.add('hidden');
+    }   
+  },3000)
+  
+
+  my_modal_3.showModal()
+
+  
 }
 
 
