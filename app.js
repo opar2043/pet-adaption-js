@@ -17,7 +17,7 @@ function showAllPetCard(pets){
        let div =  document.createElement('div');
        div.classList.add('mx-auto', 'w-3/4')
         div.innerHTML = `
-        <div class="flex justify-center items-center mx-auto border-2 w-1/2">
+        <div class="flex justify-center items-center border-2 w-full mx-auto">
              <img src="images/error.webp" class="text-center w-[200px] mx-auto">
        </div>
          <h2 class="font-bold text-lg text-center">No Information Available</h2>
@@ -33,23 +33,23 @@ function showAllPetCard(pets){
     
      pets.forEach(pet => {
         // console.log(pet);
-        let {breed,gender,date_of_birth,price,image,pet_name,petId} = pet;
+        let {breed ,gender,date_of_birth,price,image,pet_name,petId} = pet;
         let div = document.createElement('div');
         div.innerHTML = `
-           <div class="card card-compact bg-base-100 shadow">
+           <div class="card card-compact bg-base-100 shadow p-1.5">
   <figure>
     <img
-      src=${image} />
+      src=${image} class="rounded"/>
   </figure>
   <div class="card-body p-2">
-    <h2 class="card-title text-lg">${pet_name}</h2>
-    <p class="text-sm text-gray-500 pb-0.5 font-semibold"><i class="fa-solid fa-bread-slice"></i> Breed: ${breed}</p>
-    <p class="text-sm text-gray-500 pb-0.5 font-semibold"><i class="fa-regular fa-calendar"></i> Birth: ${date_of_birth}</p>
-    <p class="text-sm text-gray-500 pb-0.5 font-semibold"><i class="fa-solid fa-venus"></i> Gender:${gender}</p>
-    <p class="text-sm text-gray-500 pb-0.5 font-semibold">$ Price: ${price}</p>
+    <h2 class="card-title text-lg">${pet_name || 'Not Available'}</h2>
+    <p class="text-sm text-gray-500 pb-0.5 font-semibold"><i class="fa-brands fa-dropbox"></i> Breed: ${breed || 'Not Available'} </p>
+    <p class="text-sm text-gray-500 pb-0.5 font-semibold"><i class="fa-regular fa-calendar-days"></i> Birth: ${date_of_birth || 'Not Available'}</p>
+    <p class="text-sm text-gray-500 pb-0.5 font-semibold"><i class="fa-solid fa-venus"></i> Gender:${gender || 'Not Available'}</p>
+    <p class="text-sm text-gray-500 pb-0.5 font-semibold"><i class="fa-solid fa-dollar-sign"></i> Price: ${price  || 'Not Available'} $</p>
   </div>
   <div class="grid grid-cols-3 gap-3 p-2 border-2 rounded-lg">
-              <button onclick="petsImage('${image}')"><i class="fa-regular fa-thumbs-up"></i>
+              <button onclick="petsImage('${image}')"><i class="fa-regular fa-thumbs-up  border-2 px-3 py-0.5 rounded-md"></i>
               </button>          
               <button class="btn btn-outline btn-accent btn-xs" onclick="modalVai()">Adapt</button>
                <button class="btn btn-outline btn-accent btn-xs" onclick="showModal(${petId})">Details</button>
@@ -61,9 +61,10 @@ function showAllPetCard(pets){
 }
 
 
+
+// count modal  btn =================================
+
 let a = 3;
-
-
 function modalVai(){
 
   setInterval(()=>{
@@ -73,16 +74,18 @@ function modalVai(){
     div.innerText = a;
 
     if(a === 0){
-      countDiv.classList.add('hidden');
+      // countDiv.classList.add('hidden');
+      let closeClick = document.getElementById('closeClick');
+      closeClick.click()
+      clearInterval(countDiv)
     }   
-  },3000)
+  },1500)
   
 
   my_modal_3.showModal()
 
   
 }
-
 
 // showModal() ======================
 
@@ -108,14 +111,14 @@ function openModal(petdata){
       src=${image} class="w-full rounded-md"/>
   </figure>
   <div class="card-body p-2">
-    <h2 class="card-title text-xl">${pet_name}</h2>
+    <h2 class="card-title text-xl">${pet_name || 'Not Available'}</h2>
 
     <div class="grid grid-cols-2">
-         <p class="text-sm text-gray-500 pb-0.5 font-semibold"><i class="fa-solid fa-bread-slice"></i> Breed: ${breed}</p>
-         <p class="text-sm text-gray-500 pb-0.5 font-semibold"><i class="fa-regular fa-calendar"></i> Birth: ${date_of_birth}</p>
-         <p class="text-sm text-gray-500 pb-0.5 font-semibold"><i class="fa-solid fa-venus"></i> Gender:${gender}</p>
-         <p class="text-sm text-gray-500 pb-0.5 font-semibold"><i class="fa-solid fa-viruses"></i> vaccine: ${vaccinated_status}</p>
-         <p class="text-sm text-gray-500 pb-0.5 font-semibold">$ Price: ${price}</p>
+         <p class="text-sm text-gray-500 pb-0.5 font-semibold"><i class="fa-solid fa-bread-slice"></i> Breed: ${breed || 'Not Available'}</p>
+         <p class="text-sm text-gray-500 pb-0.5 font-semibold"><i class="fa-regular fa-calendar"></i> Birth: ${date_of_birth || 'Not Available'}</p>
+         <p class="text-sm text-gray-500 pb-0.5 font-semibold"><i class="fa-solid fa-venus"></i> Gender:${gender || 'Not Available'}</p>
+         <p class="text-sm text-gray-500 pb-0.5 font-semibold"><i class="fa-solid fa-viruses"></i> vaccine: ${vaccinated_status || 'Not Available'}</p>
+         <p class="text-sm text-gray-500 pb-0.5 font-semibold">$ Price: ${price || 'Not Available'} $</p>
     </div>
     
   </div>
@@ -123,7 +126,7 @@ function openModal(petdata){
       <form method="dialog" class="flex flex-col">
         <!-- if there is a button in form, it will close the modal -->
          <h2 class="card-title text-lg">Details</h2>
-         <p class="text-sm text-gray-500 pb-2 font-semibold">${pet_details}</p>
+         <p class="text-sm text-gray-500 pb-2 font-semibold">${pet_details || 'Not Available'}</p>
 
         <button class="btn font-bold text-green-900 bg-green-300 text-lg">Close</button>
 
@@ -156,11 +159,16 @@ function petsImage(img){
    petImg.appendChild(div)
 }
 
+
+// making category btn =======================================
+
+
 function categoryBtn(){
     fetch(`https://openapi.programming-hero.com/api/peddy/categories`)
     .then(res=> res.json())
     .then(data => makecategoryBtn(data.categories))
 }
+
 
 function makecategoryBtn(categories){
      console.log(categories);
@@ -168,25 +176,30 @@ function makecategoryBtn(categories){
 
      let cataBtn = document.getElementById('cataBtn');
      categories.forEach((cat) =>{
-        // console.log(cat);
         let {category,id ,category_icon} = cat;
 
         let btn = document.createElement('button')
-        // btn.innerText = category;
+        btn.setAttribute('id',`btn-${id}`)
      
         btn.innerHTML = `
           <img src=${category_icon} class="w-8">
           <h2 class="font-bold text-lg">${category}</h2>
         `
-        btn.classList.add('btn','bg-green-100','flex','gap-1','justify-evenly')
+        btn.classList.add('btn','bg-green-100','flex','gap-1','justify-evenly','btnbtn')
+        btn.classList.add('rounded-xl')
         btn.addEventListener('click',()=>fetchByCategory({category}))
 
-
-        // console.log(btn);
         cataBtn.appendChild(btn)
      })
 }
 
+
+
+
+
+
+
+// fetch by pets category =====================================
 
 function  fetchByCategory({category}){
     console.log(category);
@@ -201,22 +214,34 @@ function  fetchByCategory({category}){
       .then(res=> res.json())
       .then(data => showAllPetCard(data.data))
     },2000)
-
-   
-
-
-
    
 }
 
+// short by price =========================
 
+function shortByprice(){
+  console.log('object');
 
+  fetch(`https://openapi.programming-hero.com/api/peddy/pets`)
+    .then(res=> res.json())
+    .then(data => mainShortByprice(data.pets))
+}
 
+function mainShortByprice(pets){
+    console.log(pets);
 
+    const priceArr = pets.map(pet => pet.price);
+    console.log(priceArr);
 
+    pets.sort((a, b) => a.price - b.price);
+    console.log(pets);
 
+    pets.forEach(()=>{
+      showAllPetCard(pets);
+    })
 
-
+}
 
 categoryBtn()
 showAllPets()
+// shortByprice()
