@@ -233,7 +233,7 @@ function mainShortByprice(pets){
     const priceArr = pets.map(pet => pet.price);
     console.log(priceArr);
 
-    pets.sort((a, b) => a.price - b.price);
+    pets.sort((a, b) =>  b.price - a.price);
     console.log(pets);
 
     pets.forEach(()=>{
@@ -241,6 +241,9 @@ function mainShortByprice(pets){
     })
 
 }
+
+
+
 
 categoryBtn()
 showAllPets()
